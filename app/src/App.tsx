@@ -11,9 +11,7 @@ const Layout = styled.div`
 `
 
 function App() {
-  const [address, setAddress] = useState<string>(
-    '0xb847ea9e017779bf63947ad72cd6bf06407cd2e1',
-  )
+  const [address, setAddress] = useState<string>('')
 
   const isValidWalletAddress = isAddress(address)
 
