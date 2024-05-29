@@ -1,30 +1,37 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
-import { isAddress } from 'web3-validator'
 import styled from '@emotion/styled'
 
 import SearchIcon from '../../assets/search.svg?react'
 
+interface TransactionSearchProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  isValidWalletAddress: boolean
+}
+
 const TransactionSearchWrapper = styled.div`
-  padding: ${(props) => `${props.theme.layout.space400} 0`};
+  padding: ${({ theme }) => `${theme.layout.space400} 0`};
 `
 
 const SearchTitle = styled.h2`
-  margin-bottom: ${(props) => props.theme.layout.space400};
+  margin-bottom: ${({ theme }) => theme.layout.space400};
   text-align: center;
 `
 
 const SearchWrapper = styled.div`
   display: flex;
 
-  ${(props) => `
-    grid-gap: ${props.theme.layout.space300};
-    border: 1px solid ${props.theme.colors.lightGray};
-    border-radius: ${props.theme.layout.space300};
-    padding: ${props.theme.layout.space100} ${props.theme.layout.space200};
+  ${({ theme }) => `
+    grid-gap: ${theme.layout.space300};
+    border: 1px solid ${theme.colors.lightGray};
+    border-radius: ${theme.layout.space300};
+    padding: ${theme.layout.space100} ${theme.layout.space200};
 
     &:focus,
     &:focus-within {
-      border-color: ${props.theme.colors.lightGreen};
+      border-color: ${theme.colors.lightGreen};
     }
   `};
 `
@@ -32,7 +39,7 @@ const SearchWrapper = styled.div`
 const Search = styled.input`
   width: 100%;
   border: 0;
-  color: ${(props) => props.theme.colors.gray};
+  color: ${({ theme }) => theme.colors.gray};
 
   &:focus {
     outline: 0;
@@ -40,20 +47,16 @@ const Search = styled.input`
 `
 
 const SearchMessage = styled.p`
-  ${(props) => `
-    margin-top: ${props.theme.layout.space400};
-    color: ${props.theme.colors.gray};
+  ${({ theme }) => `
+    margin-top: ${theme.layout.space400};
+    color: ${theme.colors.gray};
   `};
 `
 
 const TransactionSearch = ({
+  isValidWalletAddress,
   ...props
-}: DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->) => {
-  const isValidWalletAddress = isAddress(props.value as string)
-
+}: TransactionSearchProps) => {
   return (
     <TransactionSearchWrapper>
       <SearchTitle>Transaction history</SearchTitle>
@@ -64,9 +67,9 @@ const TransactionSearch = ({
       <SearchMessage>
         {props.value && String(props.value).length > 0
           ? isValidWalletAddress
-            ? `Showing most recent transactions for wallet address ${props.value}.`
-            : `${props.value} is an invalid wallet address. Please try another address.`
-          : 'Your transaction will appear below.'}
+            ? `Showing most recent transactions for wallet address ${props.value}`
+            : `${props.value} is an invalid wallet address. Please try another address`
+          : 'Your transaction will appear below'}
       </SearchMessage>
     </TransactionSearchWrapper>
   )
