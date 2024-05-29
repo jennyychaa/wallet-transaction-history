@@ -5,7 +5,7 @@ export const theme = {
     gray: 'var(--color-gray)',
     lightGray: 'var(--color-gray-light)',
     white: 'var(--color-white)',
-    red: 'var(--color-red',
+    red: 'var(--color-red)',
     lighterGreen: 'var(--color-green-lighter)',
     lightGreen: 'var(--color-green-light)',
     green: 'var(--color-green)',
