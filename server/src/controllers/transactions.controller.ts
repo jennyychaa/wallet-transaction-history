@@ -6,7 +6,7 @@ async function getTransactionHistory(address: string, cursor?: any) {
     address,
     cursor,
     chain: EvmChain.ETHEREUM,
-    limit: 5,
+    limit: 15,
     order: 'DESC',
   })
 
