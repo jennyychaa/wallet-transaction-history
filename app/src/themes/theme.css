@@ -1,0 +1,62 @@
+:root {
+  /* spacing definitions */
+  --gutter-unit-base: 5px;
+  --gutter-100: calc(var(--gutter-unit-base) * 1);
+  --gutter-200: calc(var(--gutter-unit-base) * 2);
+  --gutter-300: calc(var(--gutter-unit-base) * 3);
+  --gutter-400: calc(var(--gutter-unit-base) * 4);
+  --page-wrapper-max-width: 468px;
+}
+
+body {
+  /* color definitions */
+  --color-black: #000000;
+  --color-gray-dark: #2e3338;
+  --color-gray: #666666;
+  --color-gray-light: #e6e6e6;
+  --color-white: #ffffff;
+  --color-red: #c93717;
+  --color-green-lighter: #f1fdf1;
+  --color-green-light: #32cd32;
+  --color-green: #1ab775;
+  --color-purple-light: #ece6f7;
+  --color-purple: #442c75;
+
+  /* theme palette definitions */
+  --color-primary: var(--color-black);
+  --color-secondary: var(--color-gray-dark);
+
+  /* typography definitions */
+  --font-family-primary: Arial, sans-serif;
+  --font-size-unit-base: 16px;
+  --font-size-75: calc(var(--font-size-unit-base) * 0.75); /* 12 */
+  --font-size-87: calc(var(--font-size-unit-base) * 0.875); /* 14 */
+  --font-size-100: calc(var(--font-size-unit-base) * 1); /* 16 */
+  --font-size-112: calc(var(--font-size-unit-base) * 1.12); /* 18 */
+  --font-size-150: calc(var(--font-size-unit-base) * 1.5); /* 24 */
+  --font-weight-normal: 400;
+  --font-weight-heavy: 700;
+
+  /* base body style */
+  background-color: var(--color-white);
+  padding: var(--gutter-400);
+  font-family: var(--font-family-primary);
+  color: var(--color-primary);
+}
+
+h1 {
+  margin-bottom: var(--gutter-300);
+  font-size: var(--font-size-150);
+}
+
+h2 {
+  font-size: var(--font-size-112);
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-secondary);
+}
+
+p {
+  margin: var(--gutter-200) 0;
+  font-size: var(--font-size-87);
+  line-height: 1.2;
+}
