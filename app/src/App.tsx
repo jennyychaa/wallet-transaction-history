@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import axios from 'axios'
-
+import { ChangeEvent, useState } from 'react'
+import { isAddress } from 'web3-validator'
 import styled from '@emotion/styled'
 
-import { Status } from './components/Status'
 import TransactionSearch from './components/TransactionSearch'
+import TransactionHistory from './components/TransactionHistory'
 
 const Layout = styled.div`
   max-width: ${(props) => props.theme.layout.pageWrapperMaxWidth};
@@ -12,41 +11,26 @@ const Layout = styled.div`
 `
 
 function App() {
-  const [status, setStatus] = useState<Status>('idle')
-  const [data, setData] = useState<{ result: string } | null>(null)
+  const [address, setAddress] = useState<string>(
+    '0xb847ea9e017779bf63947ad72cd6bf06407cd2e1',
+  )
 
-  const [address, setAddress] = useState<string>('')
+  const isValidWalletAddress = isAddress(address)
 
   const handleOnChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value)
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setStatus('loading')
-      try {
-        const response = await axios.get('http://localhost:3000/example')
-        if (response.status !== 200) {
-          throw new Error('Error fetching data')
-        }
-
-        setStatus('success')
-        setData(response.data)
-      } catch (error) {
-        setStatus('error')
-      }
-    }
-
-    void fetchData()
-  }, [])
-
   return (
     <Layout>
       <TransactionSearch
-        placeholder="Enter Etherum wallet address to see transaction history"
+        isValidWalletAddress={isValidWalletAddress}
         onChange={handleOnChangeSearch}
+        placeholder="Enter Etherum wallet address to see transaction history"
+        type="search"
         value={address}
       />
+      {isValidWalletAddress && <TransactionHistory address={address} />}
     </Layout>
   )
 }
