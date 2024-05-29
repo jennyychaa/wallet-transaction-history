@@ -1,0 +1,7 @@
+{
+  // Use the project's TypeScript version instead of the one bundled with VS Code
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.format.enable": false,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
+}
