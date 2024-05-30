@@ -1,9 +1,6 @@
+import { Transaction } from '../components/TransactionLog'
 import { Transactions } from '../components/TransactionLogs'
-
-import {
-  Transaction,
-  TokenTransfer,
-} from '../components/TransactionLogs/models'
+import { TokenTransfer } from '../components/TransferDetail'
 
 const months = [
   'January',
