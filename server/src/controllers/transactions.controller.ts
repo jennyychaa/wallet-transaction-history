@@ -6,7 +6,7 @@ async function getTransactionHistory(address: string, cursor?: any) {
     address,
     cursor,
     chain: EvmChain.ETHEREUM,
-    limit: 15,
+    limit: 10,
     order: 'DESC',
   })
 
@@ -16,11 +16,13 @@ async function getTransactionHistory(address: string, cursor?: any) {
    * TO-DO LIST:
    * 1. Fetch X number of transaction logs from Moralis API but only send Y (e.g., 5, 10) to the client-side.
    *
-   * The API results return information that currently isn't relevant to our application.
-   * We only want to send valid data related to ERC-20 token transfers so client-side doesn't have to deal with bloated data.
+   * As illustrated in the mocked design, we want to display five ERC-20 token transfer result items at a time.
+   * However, Moralis API sends transaction data of other types so the client-side may receive less than expected.
+   * As a workaround, 10 data items will be sent per request.
    *
    * Action Items:
    * - Research best method to store and cache relevant transaction logs.
+   * - Ensure that we are sending exactly Y number of data items to the client-side.
    * - Transform the data and send what's necessary in the client-side. See transformTransactionsApiData() @app/utils.
    */
   return {
