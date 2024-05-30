@@ -67,7 +67,11 @@ function TransactionLogs({ address }: TransactionLogsProps) {
 
   return (
     <>
-      <InfiniteScroll pageStart={0} loadMore={() => {}} hasMore={!!pageCursor}>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={fetchTransactionsData}
+        hasMore={!!pageCursor}
+      >
         {transactions ? (
           Object.entries(transactions).map(([date, transactions]) => (
             <TransactionLog
