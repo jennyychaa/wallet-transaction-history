@@ -3,7 +3,7 @@ import { isAddress } from 'web3-validator'
 import styled from '@emotion/styled'
 
 import TransactionSearch from './components/TransactionSearch'
-import TransactionHistory from './components/TransactionHistory'
+import TransactionLogs from './components/TransactionLogs'
 
 const Layout = styled.div`
   max-width: ${(props) => props.theme.layout.pageWrapperMaxWidth};
@@ -28,7 +28,7 @@ function App() {
         type="search"
         value={address}
       />
-      {isValidWalletAddress && <TransactionHistory address={address} />}
+      {isValidWalletAddress && <TransactionLogs address={address} />}
     </Layout>
   )
 }

@@ -48,7 +48,7 @@ const Search = styled.input`
 
 const SearchMessage = styled.p`
   ${({ theme }) => `
-    margin-top: ${theme.layout.space400};
+    margin: ${theme.layout.space400} 0 0;
     color: ${theme.colors.gray};
   `};
 `
