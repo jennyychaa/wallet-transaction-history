@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 app.use(
   cors({
-    origin: 'https://wallet-transaction-history-server.vercel.app',
+    origin: 'https://wallet-transaction-history-app.vercel.app/',
   }),
 )
 
