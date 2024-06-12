@@ -25,7 +25,7 @@ function TransactionLogs({ address }: TransactionLogsProps) {
 
     try {
       const response = await axios.get(
-        `https://wallet-transaction-history-server.vercel.app/transactions/${address}?cursor=${pageCursor || ''}`,
+        `https://wallet-transaction-history-server.vercel.app/api/transactions/${address}?cursor=${pageCursor || ''}`,
       )
 
       if (response.status !== 200) {

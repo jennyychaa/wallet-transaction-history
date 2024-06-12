@@ -11,6 +11,8 @@ app.use(
     origin: 'https://wallet-transaction-history-server.vercel.app',
   }),
 )
+
+app.get('/', (_, res) => res.send('Server successfully running ✅'))
 app.use('/transactions', transactionsRouter)
 
 export default app
