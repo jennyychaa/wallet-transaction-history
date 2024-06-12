@@ -25,10 +25,11 @@ function TransactionLogs({ address }: TransactionLogsProps) {
 
     try {
       const response = await axios.get(
-        `http://localhost:3000/transactions/${address}?cursor=${pageCursor || ''}`,
+        `https://wallet-transaction-history-server.vercel.app/transactions/${address}?cursor=${pageCursor || ''}`,
       )
 
       if (response.status !== 200) {
+        setStatus('error')
         throw new Error(
           'Uh oh, something happened fetching the transaction data...',
         )
@@ -48,11 +49,11 @@ function TransactionLogs({ address }: TransactionLogsProps) {
       setPageCursor(cursor)
       setTransactions(updatedTransactions)
     } catch (error) {
+      setStatus('error')
       console.error(
         'Uh oh, something happened fetching the transaction data...',
         error,
       )
-      setStatus('error')
     }
   }
 

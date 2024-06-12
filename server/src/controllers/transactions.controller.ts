@@ -11,11 +11,6 @@ async function getTransactionHistory(address: string, cursor?: any) {
   })
 
   /*
-   * @TODO Transform the data received from Moralis Wallet API
-   *
-   * TO-DO LIST:
-   * 1. Fetch X number of transaction logs from Moralis API but only send Y (e.g., 5, 10) to the client-side.
-   *
    * As illustrated in the mocked design, we want to display five ERC-20 token transfer result items at a time.
    * However, Moralis API sends transaction data of other types so the client-side may receive less than expected.
    * As a workaround, 10 data items will be sent per request.
