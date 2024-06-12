@@ -40,6 +40,22 @@ const DetailContentWrapper = styled.div`
   `};
 `
 
+const LeftContent = styled.div`
+  ${({ theme }) => `
+    @media (min-width: ${theme.breakpoints.tablet_small}) {
+      width: calc(80% - ${theme.layout.space100});
+    }
+  `};
+`
+
+const RightContent = styled.div`
+  ${({ theme }) => `
+    @media (min-width: ${theme.breakpoints.tablet_small}) {
+      width: 20%;
+    }
+  `};
+`
+
 const TransferIconWrapper = styled.div`
   border-radius: 100%;
   padding: 6px 8px;
@@ -108,13 +124,13 @@ const TransferDetail = ({
     <DetailWrapper>
       {getTransferIcon(category)}
       <DetailContentWrapper>
-        <div>
+        <LeftContent>
           <TransferCategory>
             {getTransferCategoryLabel(category)}
           </TransferCategory>
           <TransferSummary>{summary}</TransferSummary>
-        </div>
-        <div>
+        </LeftContent>
+        <RightContent>
           {transfers.map(({ address, direction, symbol, value }) => {
             const updatedValue = parseFloat(value).toFixed(2)
             const transferValue = `${updatedValue} ${symbol}`
@@ -127,7 +143,7 @@ const TransferDetail = ({
               </TransferValue>
             )
           })}
-        </div>
+        </RightContent>
       </DetailContentWrapper>
     </DetailWrapper>
   )

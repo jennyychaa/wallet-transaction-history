@@ -64,7 +64,7 @@ function TransactionLogs({ address }: TransactionLogsProps) {
       setPageCursor(null)
       setTransactions(null)
     }
-  }, [])
+  }, [address])
 
   return (
     <>
