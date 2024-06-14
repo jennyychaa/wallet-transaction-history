@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import axios from 'axios'
 
 import { transformTransactionsApiData } from '../../utils'
@@ -23,37 +23,39 @@ function TransactionLogs({ address }: TransactionLogsProps) {
   const fetchTransactionsData = async () => {
     setStatus('loading')
 
-    try {
-      const response = await axios.get(
-        `https://wallet-transaction-history-server.vercel.app/transactions/${address}?cursor=${pageCursor || ''}`,
-      )
+    if (status === 'idle') {
+      try {
+        const response = await axios.get(
+          `https://wallet-transaction-history-server.vercel.app/transactions/${address}?cursor=${pageCursor || ''}`,
+        )
 
-      if (response.status !== 200) {
+        if (response.status !== 200) {
+          setStatus('error')
+          throw new Error(
+            'Uh oh, something happened fetching the transaction data...',
+          )
+        }
+
+        const { cursor, result } = response.data.transaction
+
+        // If there are more transaction history to fetch, set the status to "idle".
+        // Otherwise, set the status to "success".
+        if (cursor) setStatus('idle')
+        else setStatus('success')
+
+        const updatedTransactions = transformTransactionsApiData(
+          result,
+          transactions,
+        )
+        setPageCursor(cursor)
+        setTransactions(updatedTransactions)
+      } catch (error) {
         setStatus('error')
-        throw new Error(
+        console.error(
           'Uh oh, something happened fetching the transaction data...',
+          error,
         )
       }
-
-      const { cursor, result } = response.data.transaction
-
-      // If there are more transaction history to fetch, set the status to "idle".
-      // Otherwise, set the status to "success".
-      if (cursor) setStatus('idle')
-      else setStatus('success')
-
-      const updatedTransactions = transformTransactionsApiData(
-        result,
-        transactions,
-      )
-      setPageCursor(cursor)
-      setTransactions(updatedTransactions)
-    } catch (error) {
-      setStatus('error')
-      console.error(
-        'Uh oh, something happened fetching the transaction data...',
-        error,
-      )
     }
   }
 
@@ -69,9 +71,10 @@ function TransactionLogs({ address }: TransactionLogsProps) {
   return (
     <>
       <InfiniteScroll
-        pageStart={0}
-        loadMore={fetchTransactionsData}
+        dataLength={transactions ? Object.keys(transactions).length : 0}
         hasMore={!!pageCursor}
+        loader={<></>}
+        next={fetchTransactionsData}
       >
         {transactions ? (
           Object.entries(transactions).map(([date, transactions]) => (
