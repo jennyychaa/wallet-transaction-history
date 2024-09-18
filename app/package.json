@@ -13,7 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "axios": "^1.6.7",
+    "axios": "^1.7.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
@@ -42,7 +42,7 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^5.4.4"
   },
   "prettier": "@valora/prettier-config",
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
